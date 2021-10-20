@@ -32,8 +32,19 @@ public class HuffmanCoding {
    */
   public void readUserInput() {
     Scanner scanner = new Scanner(System.in);
-    System.out.println("Enter string: ");
-    String s = scanner.nextLine();
+    System.out.println("Enter string delimited by two new lines: ");
+    String s = "";
+
+    while (scanner.hasNextLine()) {
+      String line = scanner.nextLine();
+      String line2 = scanner.nextLine();
+
+      if (line.isEmpty() && line2.isEmpty()) {
+        break;
+      }
+      s = s + line + line2;
+
+    }
 
     data = s;
   }
