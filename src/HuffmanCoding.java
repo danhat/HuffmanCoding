@@ -18,6 +18,7 @@ public class HuffmanCoding {
   private HashMap<Character, String> codes;
   private String huffmanCode;
 
+
   /**
    * initialises variables needed from encoding given text
    */
@@ -26,6 +27,7 @@ public class HuffmanCoding {
     codes = new HashMap<Character, String>();
     huffmanCode = "";
   }
+
 
   /**
    * read user input and store string as data
@@ -42,12 +44,13 @@ public class HuffmanCoding {
       if (line.isEmpty() && line2.isEmpty()) {
         break;
       }
-      s = s + line + line2;
+      s = s + "\n" + line + "\n" + line2;
 
     }
 
     data = s;
   }
+
 
   /**
    * @todo
@@ -56,6 +59,7 @@ public class HuffmanCoding {
   public void getAndReadFile() {
     System.out.println("reading from file");
   }
+
 
   /**
    * iterate through data and count and store frequecy of each character,
@@ -89,6 +93,7 @@ public class HuffmanCoding {
 
   }
 
+
   /**
    * print chacracters and frequencies
    */
@@ -100,6 +105,7 @@ public class HuffmanCoding {
        System.out.println("\t " + ch.getKey() + " \t | \t\t" + ch.getValue());
     }
   }
+
 
   /**
    * create and store codes of each character recursively
@@ -121,6 +127,7 @@ public class HuffmanCoding {
 
   }
 
+
   /**
    * print codes HashMap
    */
@@ -132,6 +139,7 @@ public class HuffmanCoding {
       System.out.println("\t " + ch.getKey() + " \t | \t\t" + ch.getValue());
     }
   }
+
 
   /**
    * store huffman code of text
@@ -145,6 +153,7 @@ public class HuffmanCoding {
     }
   }
 
+  
   /**
    * print huffman code
    */
