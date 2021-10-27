@@ -17,6 +17,7 @@ public class HuffmanCoding {
   private LinkedHashMap<Character, Integer> frequencies; //sorted
   private HashMap<Character, String> codes;
   private String huffmanCode;
+  private String decodedText;
 
 
   /**
@@ -26,6 +27,7 @@ public class HuffmanCoding {
     frequencies = new LinkedHashMap<Character, Integer>();
     codes = new HashMap<Character, String>();
     huffmanCode = "";
+    decodedText = "";
   }
 
 
@@ -34,17 +36,16 @@ public class HuffmanCoding {
    */
   public void readUserInput() {
     Scanner scanner = new Scanner(System.in);
-    System.out.println("Enter string delimited by two new lines: ");
+    System.out.println("Enter string ending with '::' on a new line: ");
     String s = "";
 
     while (scanner.hasNextLine()) {
       String line = scanner.nextLine();
-      String line2 = scanner.nextLine();
 
-      if (line.isEmpty() && line2.isEmpty()) {
+      if (line.equals("::")) {
         break;
       }
-      s = s + "\n" + line + "\n" + line2;
+      s = s + "\n" + line;
 
     }
 
@@ -107,117 +108,8 @@ public class HuffmanCoding {
   }
 
 
-  /**
-   * create and store codes of each character recursively
-   * @param n Node to create code for
-   * @param code String to represent current code
-   */
-  public void setCodes(Node n, String code) {
-    while (n.getLeft() == null && n.getRight() == null && n.isCharacter() == true) {
-      codes.put(n.getCh(), code);
-      return;
-    }
-
-    if (n.getLeft() != null) {
-      setCodes(n.getLeft(), code + "0");
-    }
-    if (n.getRight() != null) {
-      setCodes(n.getRight(), code + "1");
-    }
-
-  }
-
-
-  /**
-   * print codes HashMap
-   */
-  public void printCodesTable() {
-    System.out.println("\nCharacter | Code");
-    System.out.println("---------------------");
-
-    for (var ch : codes.entrySet()) {
-      System.out.println("\t " + ch.getKey() + " \t | \t\t" + ch.getValue());
-    }
-  }
-
-
-  /**
-   * store huffman code of text
-   */
-  public void setHuffmanCode() {
-    int i = 0;
-    while (i < data.length()) {
-      char ch = data.charAt(i);
-      huffmanCode += codes.get(ch);
-      i++;
-    }
-  }
-
-  
-  /**
-   * print huffman code
-   */
-  public void printHuffmanCode() {
-    System.out.println("\nHuffman Code is: " + huffmanCode);
-  }
-
-  /**
-   * decodes huffman code
-   * @return decoded text
-   */
-  public String decode() {
-    // reverse codes hashmap
-    Map<String, Character> reversedCodes = new HashMap<>();
-    for (Map.Entry<Character, String> entry : codes.entrySet()) {
-      reversedCodes.put(entry.getValue(), entry.getKey());
-    }
-
-    String decodedText = "";
-
-    int i = 0;
-    String code = "";
-    while (i < huffmanCode.length()) {
-      char ch = huffmanCode.charAt(i);
-      code = code + ch;
-
-      if (reversedCodes.containsKey(code)) {
-        decodedText = decodedText + reversedCodes.get(code);
-        code = "";
-      }
-
-      i++;
-    }
-
-    return decodedText;
-  }
-
-
-  public static void main(String[] args) {
-    System.out.println("Huffman Coding!\n");
-
-    Scanner scanner = new Scanner(System.in);
-    System.out.print("Enter 1 to enter a statement or 2 to enter a file: ");
-
-    String choice = scanner.next();
-
-    HuffmanCoding hf = new HuffmanCoding();
-
-    if (choice.equals("1")) {
-      hf.readUserInput();
-    }
-    else if (choice.equals("2")) {
-      hf.getAndReadFile();
-    }
-    else {
-      System.out.println("Input not recognized");
-    }
-
-    scanner.close();
-
-    hf.getAndStoreFrequencies();
-    hf.printFrequenciesTable();
-
-    MinHeap heap = new MinHeap(hf.frequencies);
+  public void setCodes() {
+    MinHeap heap = new MinHeap(frequencies);
 
     // loop until one node is left in heap
     while (heap.getSize() > 1) {
@@ -233,20 +125,126 @@ public class HuffmanCoding {
       // remove two lowest nodes
       heap.removeFrontNode();
       heap.removeFrontNode();
-
-
     }
 
-    hf.setCodes(heap.getNode(0), "");
+    setCodesHelper(heap.getNode(0), "");
+
+  }
+
+
+  /**
+   * create and store codes of each character recursively
+   * @param n Node to create code for
+   * @param code String to represent current code
+   */
+  public void setCodesHelper(Node n, String code) {
+    while (n.getLeft() == null && n.getRight() == null && n.isCharacter() == true) {
+      codes.put(n.getCh(), code);
+      return;
+    }
+
+    if (n.getLeft() != null) {
+      setCodesHelper(n.getLeft(), code + "0");
+    }
+    if (n.getRight() != null) {
+      setCodesHelper(n.getRight(), code + "1");
+    }
+
+  }
+
+
+  /**
+   * print codes HashMap
+   */
+  public void printCodesTable() {
+    System.out.println("\nCharacter | Code");
+    System.out.println("---------------------");
+
+    for (var ch : codes.entrySet()) {
+      if (ch.getKey() == '\n') {
+        System.out.printf("%5s     | %-13s%n", "\\n", ch.getValue());
+      }
+      else {
+        System.out.printf("%5s     | %-13s%n", ch.getKey(), ch.getValue());
+      }
+    }
+  }
+
+
+
+  /**
+   * store huffman code of text
+   */
+  public void setHuffmanCode() {
+    int i = 0;
+    while (i < data.length()) {
+      char ch = data.charAt(i);
+      huffmanCode += codes.get(ch);
+      i++;
+    }
+  }
+
+
+  /**
+   * print huffman code
+   */
+  public void printHuffmanCode() {
+    System.out.println("\nHuffman Code is: " + huffmanCode);
+  }
+
+
+  /**
+   * decodes huffman code and stores it in decodedText
+   */
+  public void decode() {
+    // reverse codes hashmap
+    Map<String, Character> reversedCodes = new HashMap<>();
+    for (Map.Entry<Character, String> entry : codes.entrySet()) {
+      reversedCodes.put(entry.getValue(), entry.getKey());
+    }
+
+    int i = 0;
+    String code = "";
+    while (i < huffmanCode.length()) {
+      char ch = huffmanCode.charAt(i);
+      code = code + ch;
+
+      if (reversedCodes.containsKey(code)) {
+        decodedText = decodedText + reversedCodes.get(code);
+        code = "";
+      }
+
+      i++;
+    }
+  }
+
+
+  public void printDecodedText() {
+    System.out.println("\nThe decoded text is: " + decodedText);
+  }
+
+
+
+  public static void main(String[] args) {
+    System.out.println("Huffman Coding!");
+
+    ReadInput reader = new ReadInput();
+    HuffmanCoding hf = new HuffmanCoding();
+    hf.data = reader.readFromUser();
+
+    hf.getAndStoreFrequencies();
+    //hf.printFrequenciesTable();
+
+    hf.setCodes();
     hf.printCodesTable();
 
     hf.setHuffmanCode();
     hf.printHuffmanCode();
 
-    String decoded = hf.decode();
-    System.out.println("\nThe decoded text is: " + decoded);
+    hf.decode();
+    hf.printDecodedText();
 
-
+    reader.close();
 
   }
 

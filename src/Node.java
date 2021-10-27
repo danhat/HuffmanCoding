@@ -13,9 +13,6 @@ public class Node {
   private String name;
 
 
-  //public Node() {
-
-  //}
 
   /**
    * creates a Node with the specified character and frequency of the character
