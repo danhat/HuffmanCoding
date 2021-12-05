@@ -20,6 +20,7 @@ public class HuffmanCoding {
   private String decodedText;
 
 
+
   /**
    * initialises variables needed from encoding given text
    */
@@ -30,36 +31,6 @@ public class HuffmanCoding {
     decodedText = "";
   }
 
-
-  /**
-   * read user input and store string as data
-   */
-  public void readUserInput() {
-    Scanner scanner = new Scanner(System.in);
-    System.out.println("Enter string ending with '::' on a new line: ");
-    String s = "";
-
-    while (scanner.hasNextLine()) {
-      String line = scanner.nextLine();
-
-      if (line.equals("::")) {
-        break;
-      }
-      s = s + "\n" + line;
-
-    }
-
-    data = s;
-  }
-
-
-  /**
-   * @todo
-   * read text from text file entered by user and store as data
-   */
-  public void getAndReadFile() {
-    System.out.println("reading from file");
-  }
 
 
   /**
@@ -95,6 +66,7 @@ public class HuffmanCoding {
   }
 
 
+
   /**
    * print chacracters and frequencies
    */
@@ -108,6 +80,9 @@ public class HuffmanCoding {
   }
 
 
+  /**
+   *
+   */
   public void setCodes() {
     MinHeap heap = new MinHeap(frequencies);
 
@@ -132,6 +107,7 @@ public class HuffmanCoding {
   }
 
 
+
   /**
    * create and store codes of each character recursively
    * @param n Node to create code for
@@ -153,16 +129,20 @@ public class HuffmanCoding {
   }
 
 
+
   /**
    * print codes HashMap
    */
   public void printCodesTable() {
     System.out.println("\nCharacter | Code");
-    System.out.println("---------------------");
+    System.out.println("----------------------------");
 
     for (var ch : codes.entrySet()) {
       if (ch.getKey() == '\n') {
         System.out.printf("%5s     | %-13s%n", "\\n", ch.getValue());
+      }
+      else if (ch.getKey() == '\t') {
+        System.out.printf("%5s     | %-13s%n", "\\t", ch.getValue());
       }
       else {
         System.out.printf("%5s     | %-13s%n", ch.getKey(), ch.getValue());
@@ -185,12 +165,14 @@ public class HuffmanCoding {
   }
 
 
+
   /**
    * print huffman code
    */
   public void printHuffmanCode() {
     System.out.println("\nHuffman Code is: " + huffmanCode);
   }
+
 
 
   /**
@@ -219,6 +201,9 @@ public class HuffmanCoding {
   }
 
 
+  /**
+   *
+   */
   public void printDecodedText() {
     System.out.println("\nThe decoded text is: " + decodedText);
   }
@@ -226,7 +211,7 @@ public class HuffmanCoding {
 
 
   public static void main(String[] args) {
-    System.out.println("Huffman Coding!");
+    System.out.println("Huffman Coding!\n");
 
     ReadInput reader = new ReadInput();
     HuffmanCoding hf = new HuffmanCoding();
