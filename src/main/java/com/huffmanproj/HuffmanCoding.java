@@ -1,10 +1,8 @@
-
+package com.huffmanproj;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Scanner;
-import java.util.stream.Collectors;
 
 
 /**
@@ -110,7 +108,7 @@ public class HuffmanCoding {
 
   /**
    * create and store codes of each character recursively
-   * @param n Node to create code for
+   * @param n com.huffmanproj.Node to create code for
    * @param code String to represent current code
    */
   public void setCodesHelper(Node n, String code) {

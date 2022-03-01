@@ -1,3 +1,5 @@
+package com.huffmanproj;
+
 /**
  * Represents a heap node
  * @author Danielle Hatten
@@ -5,7 +7,7 @@
 public class Node {
   private char ch;
   private int freq;
-  //private Node parent;
+  //private com.huffmanproj.Node parent;
   private Node left;
   private Node right;
   private Boolean isChar;
@@ -15,9 +17,9 @@ public class Node {
 
 
   /**
-   * creates a Node with the specified character and frequency of the character
+   * creates a com.huffmanproj.Node with the specified character and frequency of the character
    * @param c Nodes's character
-   * @param f Node's frequency
+   * @param f com.huffmanproj.Node's frequency
    */
   public Node(char c, int f) {
     ch = c;
@@ -26,10 +28,10 @@ public class Node {
   }
 
   /**
-   * create a Node for internal nodes (nodes without a char)
-   * @param f Node's new frequency (sum of left and right nodes)
-   * @param l left Node
-   * @param r right Node
+   * create a com.huffmanproj.Node for internal nodes (nodes without a char)
+   * @param f com.huffmanproj.Node's new frequency (sum of left and right nodes)
+   * @param l left com.huffmanproj.Node
+   * @param r right com.huffmanproj.Node
    */
   public Node(int f, Node l, Node r) {
     freq = f;
@@ -48,7 +50,7 @@ public class Node {
 
   /**
    * get the character of the node
-   * @return a char representing the Node's character value
+   * @return a char representing the com.huffmanproj.Node's character value
    */
   public char getCh() {
     return ch;
@@ -56,33 +58,33 @@ public class Node {
 
   /**
    * get frequency of the node
-   * @return int representing the Node's frequency
+   * @return int representing the com.huffmanproj.Node's frequency
    */
   public int getFreq() {
     return freq;
   }
 
-  //public void setLeft(Node n) { left = n; }
-  //public void setRight(Node n) { right = n; }
+  //public void setLeft(com.huffmanproj.Node n) { left = n; }
+  //public void setRight(com.huffmanproj.Node n) { right = n; }
 
   /**
-   * get Node's left Node
-   * @return Node
+   * get com.huffmanproj.Node's left com.huffmanproj.Node
+   * @return com.huffmanproj.Node
    */
   public Node getLeft() {
     return left;
   }
 
   /**
-   * get Node's right Node
-   * @return Node
+   * get com.huffmanproj.Node's right com.huffmanproj.Node
+   * @return com.huffmanproj.Node
    */
   public Node getRight() {
     return right;
   }
 
   /**
-   * set the name of the Node, to be used when printing tree
+   * set the name of the com.huffmanproj.Node, to be used when printing tree
    * @param n
    */
   public void setName(String n) {
@@ -90,7 +92,7 @@ public class Node {
   }
 
   /**
-   * get the name of the Node, to be used when printing tree
+   * get the name of the com.huffmanproj.Node, to be used when printing tree
    * @return
    */
   public String getName() {
@@ -101,7 +103,7 @@ public class Node {
   public int getVal() { return val; }*/
 
   /**
-   * get whether the Node has a char value
+   * get whether the com.huffmanproj.Node has a char value
    * @return true or false
    */
   public boolean isCharacter() {

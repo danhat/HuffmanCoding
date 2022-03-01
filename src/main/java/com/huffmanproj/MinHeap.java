@@ -1,3 +1,5 @@
+package com.huffmanproj;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -39,7 +41,7 @@ public class MinHeap {
   }
 
   /**
-   * insert a passed Node into the heap based on the Node's frequency
+   * insert a passed com.huffmanproj.Node into the heap based on the com.huffmanproj.Node's frequency
    * @param newNode
    */
   public void insertNode(Node newNode) {
@@ -61,7 +63,7 @@ public class MinHeap {
   }
 
   /**
-   * remove the front Node (the Node with the lowest frequency)
+   * remove the front com.huffmanproj.Node (the com.huffmanproj.Node with the lowest frequency)
    */
   public void removeFrontNode() {
     heap.remove(0);
@@ -78,14 +80,14 @@ public class MinHeap {
   /**
    * get node at given position
    * @param index int representing the position of node to get
-   * @return Node
+   * @return com.huffmanproj.Node
    */
   public Node getNode(int index) {
     return heap.get(index);
   }
 
   /**
-   * set passed Node as the root
+   * set passed com.huffmanproj.Node as the root
    * @param n
    */
   public void setRoot(Node n) {
